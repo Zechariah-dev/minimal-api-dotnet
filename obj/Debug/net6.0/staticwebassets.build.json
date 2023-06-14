@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "epL+mTOC9P5GTxydIE7YB5VAK8q62xVl8zcVbiDJMy0=",
+  "Source": "minimal-api-dotnet",
+  "BasePath": "_content/minimal-api-dotnet",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
