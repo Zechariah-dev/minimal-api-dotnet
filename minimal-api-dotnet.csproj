@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.7" />
+    <PackageReference Include="Swashbuckle.Aspnetcore" Version="6.5.0" />
   </ItemGroup>
 
 </Project>

@@ -2,11 +2,24 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+// builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new()
+    {
+        Title = "Todo API",
+        Version = "v1"
+    });
+});
+
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"));
+
 app.MapGet("/todoitems", async (TodoDb db) =>
-    await db.Todos.ToListAsync());
+    await db.Todos.ToListAsync()); 
 
 app.MapGet("/todoitems/complete", async (TodoDb db) =>
     await db.Todos.Where(t => t.IsComplete).ToListAsync()
@@ -33,7 +46,7 @@ app.MapPut("/todoitems/{id}", async (int id, Todo inputTodo, TodoDb db) =>
     todo.Name = inputTodo.Name;
     todo.IsComplete = inputTodo.IsComplete;
 
-    await db.SaveChangesAsync(); 
+    await db.SaveChangesAsync();
 
     return Results.NoContent();
 });
